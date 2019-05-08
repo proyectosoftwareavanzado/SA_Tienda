@@ -36,4 +36,8 @@ app.set('view engine','.hbs');
 //Se inyectan las rutas que se utilizaran con las funciones asociadas a cada ruta con su renderizado.
 app.use(api);
 
+//Se utiliza para las vistas
+app.set('views', fp.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
 module.exports = app;

@@ -1,13 +1,15 @@
 'use strict'
 
 const express = require('express');
+const routes = express.Router();
 
 /*************Instancias controladores administrador****************/
-const user = require('../controllers/users/user');
+//const user = require('../controllers/users/user');
 /*******************************************************************/
+//router.get('/users',user.listUsers);
 
-const api = express.Router();
+routes.get('/', function(req, res, next) {
+    res.render('index');
+});
 
-api.get('/users',user.listUsers);
-
-module.exports = api;
+module.exports = routes;
