@@ -7,10 +7,12 @@ async function listUsers(req,res){
         if (error) 
         {
             console.log(error);
+            res.setHeader('Access-Control-Allow-Origin', '*');
             res.jsonp({error: 'Error de conexión a la base de datos.'})
         }
         
         res.jsonp(results);
+        //res.render('/producto');
     });
 }
 

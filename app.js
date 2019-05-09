@@ -25,14 +25,6 @@ app.use(session({
   saveUninitialized: true
 }));
 
-//Se declara la extensión de los archivos de handlebars y una página o páginas base como Master Pages.
-app.engine('.hbs',hbs({
-    defaultLayout: 'default',
-    extname: '.hbs'
-}));
-
-app.set('view engine','.hbs');
-
 //Se inyectan las rutas que se utilizaran con las funciones asociadas a cada ruta con su renderizado.
 app.use(api);
 

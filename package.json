@@ -19,7 +19,8 @@
     "jquery": "^3.4.1",
     "mysql": "github:mysqljs/mysql",
     "node-cron": "^2.0.3",
-    "popper.js": "^1.15.0"
+    "popper.js": "^1.15.0",
+    "request": "^2.88.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.6"
