@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Proyecto SA</title>
@@ -11,7 +12,9 @@
   <link href="img/favicon.png" rel="icon">
   <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Roboto:100,300,400,500,700|Philosopher:400,400i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Roboto:100,300,400,500,700|Philosopher:400,400i,700,700i"
+    rel="stylesheet">
   <!-- Bootstrap css -->
   <!-- <link rel="stylesheet" href="css/bootstrap.css"> -->
   <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -37,21 +40,18 @@
         <ul class="nav-menu">
           <li class="menu-active"><a href="#hero">Home</a></li>
           <li><a href="#pricing">Productos</a></li>
+          <li><a href="#carrito">Carrito de Compras</a></li>
+          <li><a href="/reportes">Reportes</a></li>
         </ul>
       </nav>
     </div>
   </header><!-- #header -->
 
-  res.jsonp({error: 'Error
-  <!--==========================
-    Hero Section
-  ============================-->
   <section id="hero" class="wow fadeIn">
     <div class="hero-container">
       <h1>BIENVENIDO A LA TIENDA EN LINEA</h1>
       <h2>Proyecto SA</h2>
       <img src="img/hero-img.png" alt="Hero Imgs">
-      <a href="#get-started" class="btn-get-started scrollto">Ver Carrito de Compras</a>
       <a href="/insert" class="btn-get-started scrollto">Cargar Productos</a>
     </div>
   </section><!-- #hero -->
@@ -71,9 +71,8 @@
 
     <div class="container">
       <div class="row">
-        
         <% for(var i=0; i < products.length; i= i + 1){ %>
-        <div class="col-md-6 col-lg-3">
+        <form action="/carrito" method="post" class="col-md-3 col-lg-3">
           <div class="block-pricing">
             <div class="table">
               <h4><%=products[i].nombre%></h4>
@@ -83,40 +82,89 @@
                 <li><b>Descripcion:</b><%=products[i].descripcion%></li>
               </ul>
               <div class="table_btn">
-                <a href="#" class="btn"><i class="fa fa-shopping-cart"></i> Buy Now</a>
+                <!--<a href='' class="btn"><i class="fa fa-shopping-cart"></i> Buy Now</a>-->
+                <button name="BotonCarrito" value="<%=products[i].idProducto%>" class="btn" type="submit"><i
+                    class="fa fa-shopping-cart"></i>
+                  Buy Now</button>
               </div>
             </div>
           </div>
-        </div>
+        </form>
         <% } %>
+ 
 
       </div>
     </div>
   </section>
 
   <!--==========================
+    Carrito Table Section
+  ============================-->
+  <section id="carrito" class="padd-section text-center wow fadeInUp">
+
+    <div class="container">
+      <div class="section-title text-center">
+
+        <h2>Carrito de Compras</h2>
+        <p class="separator">Productos agregados al carrito</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <form action="/realizarOrden" method="post" class="col-md-4">
+          <div class="testimonials-content">
+            <div class="table">
+              <table border-collapse:collapse;>
+                <tr>
+                  <th>NOMBRE</th>
+                  <th>PRECIO</th>
+                  <th>CANTIDAD</th>
+                </tr>
+                <%try { %>
+        
+                <% for(var i=0; i < carrito.length; i= i + 1){ %>
+                <tr>
+                  <td><%=carrito[i].nombre%></td>
+                  <td>$<%=carrito[i].precioLista%></td>
+                  <td><input type="number" name="quantity" min="1" max="10" value="1"> </td>
+                </tr>
+                <% } %>
+                <% }catch(error) {}%>
+              </table>
+              <button name="BotonOrden" value="" class="btn" type="submit" background-color="#4CAF50"><i
+                  class="fa fa-shopping-cart"></i>
+                REALIZAR ORDEN</button>
+
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+  <!--==========================
     Footer
   ============================-->
   <footer class="footer">
- 
 
-  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
-  <!-- JavaScript Libraries -->
-  <script src="lib/jquery/jquery.min.js"></script>
-  <script src="lib/jquery/jquery-migrate.min.js"></script>
-  <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="lib/superfish/hoverIntent.js"></script>
-  <script src="lib/superfish/superfish.min.js"></script>
-  <script src="lib/easing/easing.min.js"></script>
-  <script src="lib/modal-video/js/modal-video.js"></script>
-  <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-  <script src="lib/wow/wow.min.js"></script>
-  <!-- Contact Form JavaScript File -->
-  <script src="contactform/contactform.js"></script>
+    <!-- JavaScript Libraries -->
+    <script src="lib/jquery/jquery.min.js"></script>
+    <script src="lib/jquery/jquery-migrate.min.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/superfish/hoverIntent.js"></script>
+    <script src="lib/superfish/superfish.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/modal-video/js/modal-video.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <!-- Contact Form JavaScript File -->
+    <script src="contactform/contactform.js"></script>
 
-  <!-- Template Main Javascript File -->
-  <script src="js/main.js"></script>
- </footer>
+    <!-- Template Main Javascript File -->
+    <script src="js/main.js"></script>
+  </footer>
 </body>
+
 </html>
