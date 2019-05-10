@@ -4,7 +4,7 @@ const conn = require('../connect').connection;
 let productos;
 let carrito;
 
-async function setReporte(req, res) {
+async function verReporte(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     /*
     await conn.query('SELECT * FROM TIENDA.Producto;', function (error, results, fields) {
@@ -30,5 +30,5 @@ async function setReporte(req, res) {
 }
 
 module.exports = {
-    setReporte
+    verReporte
 }

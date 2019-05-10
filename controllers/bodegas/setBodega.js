@@ -5,7 +5,7 @@ var http = require('http');
 var Request = require("request");
 let jsonProductos;
 
-async function getCatalogo(req, res) {
+async function setBodega(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     Request.get("http://localhost:8002/users", (error, response, body) => {
         if (error) {
@@ -22,5 +22,5 @@ async function getCatalogo(req, res) {
 }
 
 module.exports = {
-    getCatalogo
+    setBodega
 }
