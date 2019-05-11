@@ -33,7 +33,7 @@ async function setOrden(req, res) {
                         'authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6MSwicm9sZXMiOiJvYnRlbmVyQ2F0YWxvZ28sZW5yaXF1ZWNlclByb2R1Y3RvLG9idGVuZXJJbnZlbnRhcmlvLHJlYWxpemFyRGVzcGFjaG8iLCJpYXQiOjE1NTc1OTA5MTQsImV4cCI6MTU1NzU5NDUxNH0.G_doZW6g_j2JR6T3qwdKrdX4TszgrmeraDEQHdafwlM'
                     },
                     body: { arreglo: texto, 
-                    destino: "35.231.130.137", origen: "35.231.130.137" }
+                    destino: "argentina.bodega5.softareavanzado.world:8083", origen: "35.231.130.137" }
                 };
                 Request(options, (err, response, body) => {
                     console.log(body);
