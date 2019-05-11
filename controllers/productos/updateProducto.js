@@ -20,8 +20,8 @@ async function updateProduct(req, res) {
             console.log(texto);
 
             const options = {
-                //url: 'http://35.231.130.137:8081/PIM/enriquecerProducto',
-                url: 'http://america.esb5.softwareavanzado.world:8081/PIM/enriquecerProducto',
+                url: 'http://35.231.130.137:8081/PIM/enriquecerProducto',
+                //url: 'http://america.esb5.softwareavanzado.world:8081/PIM/enriquecerProducto',
                 method: 'GET',
                 json: true,
                 headers: {
