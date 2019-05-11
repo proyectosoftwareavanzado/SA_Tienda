@@ -26,7 +26,7 @@ async function updateProduct(req, res) {
                 json: true,
                 headers: {
                     'scope': 'enriquecerProducto',
-                    'authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6MSwicm9sZXMiOiJvYnRlbmVyQ2F0YWxvZ28sZW5yaXF1ZWNlclByb2R1Y3RvLG9idGVuZXJJbnZlbnRhcmlvLHJlYWxpemFyRGVzcGFjaG8iLCJpYXQiOjE1NTc1NjcxNDAsImV4cCI6MTU1NzU3MDc0MH0.-O5ZJxnIqrJ_eEPSE5SFDCBSkSyeFzWwfmDXJVwquLk'
+                    'authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6MSwicm9sZXMiOiJvYnRlbmVyQ2F0YWxvZ28sZW5yaXF1ZWNlclByb2R1Y3RvLG9idGVuZXJJbnZlbnRhcmlvLHJlYWxpemFyRGVzcGFjaG8iLCJpYXQiOjE1NTc1OTM3OTUsImV4cCI6MTU1NzU5NzM5NX0.7tcMYegcxTJs2MlH5l34GxSvcuMmMdRcd14G4hzSeac'
                 },
                 body: { arreglo: texto }
             };

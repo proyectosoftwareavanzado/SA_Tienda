@@ -30,7 +30,7 @@ async function setOrden(req, res) {
                     json: true,
                     headers: {
                         'scope': 'obtenerInventario',
-                        'authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6MSwicm9sZXMiOiJvYnRlbmVyQ2F0YWxvZ28sZW5yaXF1ZWNlclByb2R1Y3RvLG9idGVuZXJJbnZlbnRhcmlvLHJlYWxpemFyRGVzcGFjaG8iLCJpYXQiOjE1NTc1OTA5MTQsImV4cCI6MTU1NzU5NDUxNH0.G_doZW6g_j2JR6T3qwdKrdX4TszgrmeraDEQHdafwlM'
+                        'authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6MSwicm9sZXMiOiJvYnRlbmVyQ2F0YWxvZ28sZW5yaXF1ZWNlclByb2R1Y3RvLG9idGVuZXJJbnZlbnRhcmlvLHJlYWxpemFyRGVzcGFjaG8iLCJpYXQiOjE1NTc1OTM3OTUsImV4cCI6MTU1NzU5NzM5NX0.7tcMYegcxTJs2MlH5l34GxSvcuMmMdRcd14G4hzSeac'
                     },
                     body: { arreglo: texto, 
                     destino: "argentina.bodega5.softareavanzado.world:8083", origen: "35.231.130.137" }
@@ -60,7 +60,7 @@ async function setOrden(req, res) {
                             json: true,
                             headers: {
                                 'scope': 'realizarDespacho',
-                                'authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6MSwicm9sZXMiOiJvYnRlbmVyQ2F0YWxvZ28sZW5yaXF1ZWNlclByb2R1Y3RvLG9idGVuZXJJbnZlbnRhcmlvLHJlYWxpemFyRGVzcGFjaG8iLCJpYXQiOjE1NTc1OTA5MTQsImV4cCI6MTU1NzU5NDUxNH0.G_doZW6g_j2JR6T3qwdKrdX4TszgrmeraDEQHdafwlM'
+                                'authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6MSwicm9sZXMiOiJvYnRlbmVyQ2F0YWxvZ28sZW5yaXF1ZWNlclByb2R1Y3RvLG9idGVuZXJJbnZlbnRhcmlvLHJlYWxpemFyRGVzcGFjaG8iLCJpYXQiOjE1NTc1OTM3OTUsImV4cCI6MTU1NzU5NzM5NX0.7tcMYegcxTJs2MlH5l34GxSvcuMmMdRcd14G4hzSeac'
                             },
                             body: {
                                 sku: sku, cantidad: cantidad, direccion: "Direccion del cliente", pais: "Guatemala"
