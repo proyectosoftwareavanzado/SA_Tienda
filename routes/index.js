@@ -17,7 +17,7 @@ routes.get('/Tienda/guardarCatalogo', insert.insertProduct); //Insertar producto
 
 routes.get('/Tienda/enriquecerTienda', update.updateProduct);//Enriquecer producto desde el PIM
 
-routes.get('/Cliente/ordenCliente', clienteOrden.setOrden);//Agrega la orden, busca inventario de bodega, 
+routes.get('/ordenCliente', clienteOrden.setOrden);//Agrega la orden, busca inventario de bodega, 
 //tiempo de despacho, entre otras cosas.... 
 
 routes.get('/Tienda/catalogoTienda', clienteCatalogo.setCatalogo);//Muestra el catalogo para el cliente
