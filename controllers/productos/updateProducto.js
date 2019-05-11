@@ -13,22 +13,24 @@ async function updateProduct(req, res) {
             res.jsonp({ error: 'Error de conexión a la base de datos.' })
         }
         if (results.length >= 1) {
-            var texto = "[";
-            for (let i = 0; i < results.length - 1; i++) {
-                texto = texto + '"' + results[i].sku + '",';
+            var texto = [];
+            for (let i = 0; i < results.length; i++) {
+                texto[i] = results[i].sku;
             }
-            texto = texto + '"' + results[results.length - 1].sku + '"] ';
-            console.log("ruta/PIM/enriquecerProducto" + texto);
+            console.log(texto);
 
             const options = {
                 url: 'http://35.231.130.137:8081/PIM/enriquecerProducto',
                 method: 'GET',
                 json: true,
-                body: { arreglo: [texto] }
+                headers: {
+                    'scope': 'enriquecerProducto',
+                    'authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6MSwicm9sZXMiOiJvYnRlbmVyQ2F0YWxvZ28sZW5yaXF1ZWNlclByb2R1Y3RvLG9idGVuZXJJbnZlbnRhcmlvLHJlYWxpemFyRGVzcGFjaG8iLCJpYXQiOjE1NTc1NjcxNDAsImV4cCI6MTU1NzU3MDc0MH0.-O5ZJxnIqrJ_eEPSE5SFDCBSkSyeFzWwfmDXJVwquLk'
+                },
+                body: { arreglo: texto }
             };
-
             Request(options, (err, response, body) => {
-                //console.log(body);
+                console.log(body);
                 jsonUpdate = body;
                 //ACTUALIZAR PRODUCTO
                 for (let i = 0; i < jsonUpdate.length; i++) {

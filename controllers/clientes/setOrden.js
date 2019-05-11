@@ -17,75 +17,63 @@ async function setOrden(req, res) {
             console.log(jsonOrdenCliente);
             //Generar la lista de SKU para obtener el inventario de bodega
             if (jsonOrdenCliente.length >= 1) {
-                var texto = "[";
-                for (let i = 0; i < jsonOrdenCliente.length - 1; i++) {
-                    texto = texto + '"' + jsonOrdenCliente[i].sku + '",';
+                var texto = [];
+                for (let i = 0; i < jsonOrdenCliente.length; i++) {
+                    texto[i] = jsonOrdenCliente[i].sku;
                 }
-                texto = texto + '"' + jsonOrdenCliente[jsonOrdenCliente.length - 1].sku + '"] ';
-
                 //Obtener inventario de bodega
+                //console.log("TEXTO = " + texto);
                 const options = {
-                    url: 'http://localhost:8002/Bodega/obtenerInventario',
+                    url: 'http://35.231.130.137:8083/Bodega/obtenerInventario',
                     method: 'GET',
                     json: true,
-                    body: { arreglo: [texto] }
+                    headers: {
+                        'scope': 'obtenerInventario',
+                        'authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6MSwicm9sZXMiOiJvYnRlbmVyQ2F0YWxvZ28sZW5yaXF1ZWNlclByb2R1Y3RvLG9idGVuZXJJbnZlbnRhcmlvLHJlYWxpemFyRGVzcGFjaG8iLCJpYXQiOjE1NTc1Njg4NjUsImV4cCI6MTU1NzU3MjQ2NX0.YAHxBK8P2ESOoiPkgewFdeJ2GSq-qqYAuGbZaMqkcZw'
+                    },
+                    body: { arreglo: texto, destino: "35.231.130.137", origen: "35.231.130.137" }
                 };
 
                 Request(options, (err, response, body) => {
-                   var jsonInventarioBodega = body;
-                    console.log("CUERPO INVENTARIO = " + body)
+                    var jsonInventarioBodega = body["products"];
+                    console.log("CUERPO INVENTARIO = ");
+                    console.log(jsonInventarioBodega);
 
                     //Verifiicar que hayan productos disponibles
+                    console.log("TAM = " + jsonOrdenCliente.length + '-' + jsonInventarioBodega.length);
                     if (jsonOrdenCliente.length == jsonInventarioBodega.length) {
-                        var textoSKU = "[";
-                        var textDespacho = "[";
+
                         for (let i = 0; i < jsonInventarioBodega.length; i++) {
-                            if (jsonInventarioBodega[i].cantidad >= jsonOrdenCliente[i].cantidad) {
-                                textoSKU = textoSKU + '"' + jsonInventarioBodega[i].sku + '",';
-                                textDespacho = textDespacho + '{"sku": "' + jsonInventarioBodega[i].sku + '",'
-                                    + '"cantidad": ' + jsonInventarioBodega[i].cantidad + ','
-                                    + '"direccion": "Direccion del cliente", '
-                                    + '"pais": "Guatemala"},';
+                            console.log("Cantidad = " + jsonInventarioBodega[i].inventario + '-' + jsonOrdenCliente[i].cantidad);
+                            if (jsonInventarioBodega[i].inventario >= jsonOrdenCliente[i].cantidad) {
+                                var sku = '"' + jsonOrdenCliente[i].sku + '"';
+                                var cantidad = '"' + jsonOrdenCliente[i].cantidad + '"';
+                                //REALIZAR DESPACHO
+                                const options = {
+                                    url: 'http://35.231.130.137:8083/Bodega/realizarDespacho',
+                                    method: 'POST',
+                                    json: true,
+                                    headers: {
+                                        'scope': 'realizarDespacho',
+                                        'authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6MSwicm9sZXMiOiJvYnRlbmVyQ2F0YWxvZ28sZW5yaXF1ZWNlclByb2R1Y3RvLG9idGVuZXJJbnZlbnRhcmlvLHJlYWxpemFyRGVzcGFjaG8iLCJpYXQiOjE1NTc1Njg4NjUsImV4cCI6MTU1NzU3MjQ2NX0.YAHxBK8P2ESOoiPkgewFdeJ2GSq-qqYAuGbZaMqkcZw'
+                                    },
+                                    body: {
+                                        sku: sku, cantidad: cantidad, direccion: "Direccion del cliente", pais: "Guatemala"
+                                    }
+                                };
+
+                                Request(options, (err, response, body) => {
+                                    console.log("entro");
+                                    if (err) {
+                                        console.log(err);
+                                    }
+                                    res.jsonp(body);
+
+                                    console.log("LLEGO AL FINAL");
+                                    console.log(body);
+                                });
                             }
                         }
-                        textoSKU = textoSKU + '"' + jsonInventarioBodega[jsonInventarioBodega.length - 1].sku + '"] ';
-                        textDespacho = textDespacho + '"sku": "' + jsonInventarioBodega[jsonInventarioBodega.length - 1].sku + '",'
-                            + '"cantidad": ' + jsonInventarioBodega[jsonInventarioBodega.length - 1].cantidad + ','
-                            + '"direccion": "Direccion del cliente", '
-                            + '"pais": "Guatemala"}]';
-                        console.log("TEXTO SKU = " + textoSKU);
-                        console.log("DESPACHO = " + textDespacho);
-                        //Obtener tiempo de respuesta de los productos a bodega (Sirve para el reporte)
-                        /* const options = {
-                             url: 'http://localhost:8002/Bodega/obtenerTiempoRespuesta',
-                             method: 'GET',
-                             json: true,
-                             body: { arreglo: [textoSKU] }
-                         };
- 
-                         Request(options, (err, response, body) => {
-                             var jsonTiempoRespuesta = body;
-                             res.jsonp(jsonTiempoRespuesta);
-                         
-                             console.log("LLEGO AL FINAL");
-                             console.log(jsonTiempoRespuesta);
-                         });
-                         */
-
-                        //REALIZAR DESPACHO
-                        const options = {
-                            url: 'http://localhost:8002/Bodega/realizarDespacho',
-                            method: 'GET',
-                            json: true,
-                            body: { arreglo: [textDespacho] }
-                        };
-
-                        Request(options, (err, response, body) => {
-                            res.jsonp(body);
-
-                            console.log("LLEGO AL FINAL");
-                            console.log(body);
-                        });
                     }
                 });
             }
